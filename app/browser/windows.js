@@ -268,6 +268,8 @@ const api = {
         updateWindowDebounce(windowId)
       })
     })
+    // create a buffer window
+    api.createBufferWindow()
     // TODO(bridiver) - handle restoring windows
     // windowState.getWindows(state).forEach((win) => {
     //   console.log('restore', win.toJS())
@@ -399,8 +401,7 @@ const api = {
       win.close()
       cleanupWindow(bufferWindowId)
       bufferWindowId = null
-    }
-    else {
+    } else {
       console.log('nothing to close')
     }
   },
@@ -421,12 +422,12 @@ const api = {
     // only if we don't have one already
     let win = api.getDragBufferWindow()
     if (!win) {
-      console.log('CREATED')
+      console.log('created buffer window')
       options = Object.assign({ fullscreen: false, show: false }, options)
       win = api.createWindow(options, null, false, null)
       bufferWindowId = win.id
     } else {
-      console.log('already had buffer window', win)
+      console.log('already had buffer window')
     }
     return win
   },
